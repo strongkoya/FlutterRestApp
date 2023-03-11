@@ -4,19 +4,20 @@ import 'package:rest/models/cases.dart';
 import 'package:http/http.dart';
 
 class ApiService {
-  final Uri apiUrl = Uri.parse('http://192.168.0.7:3000/api');
+  //final Uri apiUrl = Uri.parse('http://192.168.0.7:3000/api');
+final Uri apiUrl = Uri.parse('http://127.0.0.1:3004/cases');
+ Future<List<Cases>> getCases() async {
+  Response res = await get(apiUrl);
 
-  Future<List<Cases>> getCases() async {
-    Response res = await get(apiUrl);
-
-    if (res.statusCode == 200) {
-      List<dynamic> body = jsonDecode(res.body);
-      List<Cases> cases = body.map((dynamic item) => Cases.fromJson(item)).toList();
-      return cases;
-    } else {
-      throw "Failed to load cases list";
-    }
+  if (res.statusCode == 200) {
+    List<dynamic> body = jsonDecode(res.body);
+    List<Cases> cases = body.map((dynamic item) => Cases.fromJson(item)).toList();
+    return cases;
+  } else {
+    throw Exception('Failed to load cases list');
   }
+}
+
 
   Future<Cases> getCaseById(String id) async {
     final response = await get('$apiUrl/$id' as Uri);
@@ -46,7 +47,7 @@ class ApiService {
       },
       body: jsonEncode(data),
     );
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       return Cases.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to post cases');

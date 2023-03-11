@@ -1,0 +1,79 @@
+{
+  "cases": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "gender": "Male",
+      "age": 35,
+      "address": "123 Main St",
+      "city": "Anytown",
+      "country": "USA",
+      "status": "Active",
+      "updated": "2022-03-02"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "gender": "Female",
+      "age": 28,
+      "address": "456 Elm St",
+      "city": "Othertown",
+      "country": "USA",
+      "status": "Active",
+      "updated": "2022-02-01"
+    },
+    {
+      "id": "3",
+      "name": "Bob Johnson",
+      "gender": "Male",
+      "age": 42,
+      "address": "789 Oak St",
+      "city": "Anycity",
+      "country": "Canada",
+      "status": "Inactive",
+      "updated": "2021-12-15"
+    },
+    {
+      "id": "4",
+      "name": "Alice Lee",
+      "gender": "Female",
+      "age": 19,
+      "address": "234 Maple Ave",
+      "city": "Otherville",
+      "country": "Canada",
+      "status": "Active",
+      "updated": "2022-03-02"
+    },
+    {
+      "id": "5",
+      "name": "Tom Jones",
+      "gender": "Male",
+      "age": 57,
+      "address": "567 Pine St",
+      "city": "Anycity",
+      "country": "USA",
+      "status": "Inactive",
+      "updated": "2022-03-02"
+    },
+    {
+      "name": "efefezf",
+      "gender": "male",
+      "age": 15,
+      "address": "efef",
+      "city": "efee",
+      "country": "efef",
+      "status": "positive",
+      "id": "IbhULwS"
+    },
+    {
+      "name": "aaaaaaa",
+      "gender": "male",
+      "age": 1789,
+      "address": "aa",
+      "city": "aa",
+      "country": "aa",
+      "status": "positive",
+      "id": "jfz2Vis"
+    }
+  ]
+}

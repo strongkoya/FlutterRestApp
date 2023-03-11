@@ -12,17 +12,17 @@ class Cases {
   Cases({  this.id, required this.name, required this.gender, required this.age, required this.address, required this.city, required this.country, required this.status,  this.updated });
 
   factory Cases.fromJson(Map<String, dynamic> json) {
-    return Cases(
-      id: json['_id'] as String,
-      name: json['name'] as String,
-      gender: json['gender'] as String,
-      age: json['age'] as int,
-      address: json['address'] as String,
-      city: json['city'] as String,
-      country: json['country'] as String,
-      status: json['status'] as String,
-      updated: json['updated'] as String,
-    );
+return Cases(
+id: json['id'],
+name: json['name'],
+gender: json['gender'],
+age: json['age'],
+address: json['address'],
+city: json['city'],
+country: json['country'],
+status: json['status'],
+updated: json['updated'],
+);
   }
 
   @override
