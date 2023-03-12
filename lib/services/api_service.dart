@@ -5,22 +5,23 @@ import 'package:http/http.dart';
 
 class ApiService {
   //final Uri apiUrl = Uri.parse('http://192.168.0.7:3000/api');
-final Uri apiUrl = Uri.parse('http://127.0.0.1:3004/cases');
- Future<List<Cases>> getCases() async {
-  Response res = await get(apiUrl);
-
-  if (res.statusCode == 200) {
-    List<dynamic> body = jsonDecode(res.body);
-    List<Cases> cases = body.map((dynamic item) => Cases.fromJson(item)).toList();
-    return cases;
-  } else {
-    throw Exception('Failed to load cases list');
+  final Uri apiUrl = Uri.parse('http://127.0.0.1:3004/cases');
+  Future<List<Cases>> getCases() async {
+    Response res = await get(apiUrl);
+    
+    if (res.statusCode == 200) {
+      List<dynamic> body = jsonDecode(res.body);
+      List<Cases> cases =
+          body.map((dynamic item) => Cases.fromJson(item)).toList();
+         // print(cases);
+      return cases;
+    } else {
+      throw Exception('Failed to load cases list');
+    }
   }
-}
-
 
   Future<Cases> getCaseById(String id) async {
-    final response = await get('$apiUrl/$id' as Uri);
+    final response = await get(Uri.parse('http://127.0.0.1:3004/cases/$id'));
 
     if (response.statusCode == 200) {
       return Cases.fromJson(json.decode(response.body));
@@ -37,7 +38,8 @@ final Uri apiUrl = Uri.parse('http://127.0.0.1:3004/cases');
       'address': cases.address,
       'city': cases.city,
       'country': cases.country,
-      'status': cases.status
+      'status': cases.status,
+      'updated': DateTime.now().toString().substring(0, 10)
     };
 
     final Response response = await post(
@@ -62,11 +64,14 @@ final Uri apiUrl = Uri.parse('http://127.0.0.1:3004/cases');
       'address': cases.address,
       'city': cases.city,
       'country': cases.country,
-      'status': cases.status
+      'status': cases.status,
+      'updated': DateTime.now().toString().substring(0, 10)
     };
 
     final Response response = await put(
-      '$apiUrl/$id' as Uri,
+     // '$apiUrl/$id' as Uri,
+     Uri.parse('http://127.0.0.1:3004/cases/$id'),
+
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -80,7 +85,7 @@ final Uri apiUrl = Uri.parse('http://127.0.0.1:3004/cases');
   }
 
   Future<void> deleteCase(String id) async {
-    Response res = await delete('$apiUrl/$id' as Uri);
+    Response res = await delete(Uri.parse('http://127.0.0.1:3004/cases/$id'));
 
     if (res.statusCode == 200) {
       print("Case deleted");
@@ -88,5 +93,4 @@ final Uri apiUrl = Uri.parse('http://127.0.0.1:3004/cases');
       throw "Failed to delete a case.";
     }
   }
-
 }

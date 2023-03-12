@@ -74,24 +74,25 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Container(
-  child: Center(
-    child: FutureBuilder(
-      future: loadList(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData && casesList.isNotEmpty) {
-          return CasesList(cases: casesList);
-        } else {
-          return Center(
-            child: Text(
-              'No data found, tap plus button to add!',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-          );
-        }
-      },
-    ),
-  ),
-),
+        child: Center(
+          child: FutureBuilder(
+            future: loadList(),
+            builder: (context, snapshot) {
+              print(snapshot.data);
+              if (snapshot.hasData ) {
+                return CasesList(cases: snapshot.data);
+              } else {
+                return Center(
+                  child: Text(
+                    'No data found, tap plus button to add!',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                );
+              }
+            },
+          ),
+        ),
+      ),
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -103,8 +104,9 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Future loadList() {
+  /* Future loadList() {
     Future<List<Cases>> futureCases = api.getCases();
+    print(api.getCases().toString());
     futureCases.then((casesList) {
       setState(() {
         this.casesList = casesList;
@@ -112,8 +114,18 @@ class _MyHomePageState extends State<MyHomePage> {
     });
     return futureCases;
   }
+  */
 
-  _navigateToAddScreen (BuildContext context) async {
+  Future loadList() async {
+    List<Cases> casesList = await api.getCases();
+    print(casesList.toString());
+    setState(() {
+      this.casesList = casesList;
+    });
+    return casesList;
+  }
+
+  _navigateToAddScreen(BuildContext context) async {
     final result = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => AddDataWidget()),
